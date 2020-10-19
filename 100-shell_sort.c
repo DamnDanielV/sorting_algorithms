@@ -7,23 +7,14 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	int *arr_gap, gap, gaps, i;
+	int gap;
 	size_t i_check, prev;
-	size_t sum;
-
-	gaps = 0;
-	for (sum = 1; sum <= size / 2; sum = sum * 3 + 1)
-		gaps++;
 
 	if (array && size > 1)
 	{
-		arr_gap = malloc(sizeof(int) * gaps);
-
-		for (sum = 1, i = 0; i < gaps; sum = sum * 3 + 1, i++)
-			arr_gap[i] = sum;
-
+		for (gap = 1; gap * 3 + 1 < (int)size; gap = gap * 3 + 1)
+			;
 		prev = 0;
-		gap = arr_gap[--i];
 		i_check = prev + gap;
 
 		while (i_check < size)
@@ -37,9 +28,9 @@ void shell_sort(int *array, size_t size)
 			if (i_check >= size)
 			{
 				print_array(array, size);
-				if (i != 0)
+				if (gap > 1)
 				{
-					gap = arr_gap[--i];
+					gap = (gap - 1) / 3;
 					prev = 0;
 					i_check = prev + gap;
 				}
